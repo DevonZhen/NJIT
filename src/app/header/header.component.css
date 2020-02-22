@@ -1,0 +1,8 @@
+#topnavbar{
+    background: linear-gradient(to right, rgba(189,21,21,1), #ff4b2b);
+    height:40px;
+}
+#bottomnavbar{
+    background: linear-gradient(207deg, rgba(237,26,26,1) 0%, rgba(189,21,21,1) 89%);
+    height:50px;
+}

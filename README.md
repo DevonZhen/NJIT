@@ -25,3 +25,28 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## RegistrationWeb code setup in Visual Studio Code
+   Go to Top menu
+   1. File/Open Folder...
+      Select the RegistrationWeb which you have cloned from the GITHUB.
+   2. Terminal/New Terminal
+      Execute the following installation in New Terminal
+      a) npm install     
+      b) npm install -g @angular/cli         (sudo)
+      c) npm install -g typescript
+      d) npm install bootstrap --save
+         copy @import '~bootstrap/dist/css/bootstrap.min.css'; to styles.css
+      e) npm install --save font-awesome angular-font-awesome
+         copy @import "~font-awesome/css/font-awesome.css"; to styles.css
+      f) npm install --save @angular/cdk @angular/material @angular/animations hammers
+         copy @import "~@angular/material/prebuilt-themes/indigo-pink.css"; to style.css
+      g) npm install @material-extended/mde    
+	  h) npm install ngx-mask --save 
+      i) npm install ngx-show-hide-password --save 
+      j) npm install @fortawesome/angular-fontawesome @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons --save
+      k) matIcon:
+         copy @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+
+    This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
