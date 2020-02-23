@@ -8,7 +8,7 @@ import { DataService } from './data.service';
 export class RestfulService extends DataService {
 
   constructor(http: HttpClient) { 
-    super("assets", http); 
+    super(http); 
   }
 
 }

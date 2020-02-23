@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +15,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 //Component Specific
@@ -36,7 +42,10 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,MatInputModule,MatTableModule,MatSelectModule,MatIconModule,MatFormFieldModule
+    MatButtonModule,MatInputModule,MatTableModule,MatSelectModule,MatIconModule,MatFormFieldModule,MatCardModule,MatDatepickerModule,MatNativeDateModule,
+    HttpClientModule,
+    ShowHidePasswordModule,
+    FormsModule, ReactiveFormsModule,
     
   ],
   providers: [],

@@ -1,1 +1,121 @@
-<p>person-details works!</p>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="text-align: center;" > <h1>Person Details</h1></div>
+    <div class="col-sm-2" ></div>
+</div>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8"><mat-card id="matcardheader"></mat-card></div>
+    <div class="col-sm-2"></div>
+</div>
+<form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8" style="text-align: center;" >
+        <mat-card>
+            <div class="row">
+                <div class="col-sm-3">
+                    <mat-form-field class="example-full-width" >
+                        <mat-label>User ID</mat-label>
+                        <input matInput required>
+                    </mat-form-field> 
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>First Name</mat-label>
+                        <input matInput formControlName="firstName" required>
+                        <mat-error>
+                            <span *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid && firstName.errors.required">
+                              First is required.
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact Name</mat-label>
+                        <input matInput >
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Phone</mat-label>
+                        <input matInput >
+                    </mat-form-field>
+                    
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field class="full-width">
+                        <input id="password1" type="password" placeholder="Password" matInput showHideInput >
+                        <i class="material-icons" matSuffix showHideTrigger="password1" [showHideStatus]="{ materialIcon: true, id: 'password1' }"></i>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact Relation</mat-label>
+                        <input matInput >
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <mat-label>Phone Type</mat-label>
+                        <mat-select>
+                          <mat-option>None</mat-option>
+                          <mat-option value="home">Home</mat-option>
+                          <mat-option value="cell">Cell</mat-option>
+                          <mat-option value="work">Work</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field class="full-width">
+                        <input id="password1" type="password" placeholder="Password" matInput showHideInput>
+                        <i class="material-icons" matSuffix showHideTrigger="password1" [showHideStatus]="{ materialIcon: true, id: 'password1' }"></i>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>SSN</mat-label>
+                        <input matInput required>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact Phone</mat-label>
+                        <input matInput >
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-3">
+                    <mat-form-field>
+                        <mat-label>Person Type</mat-label>
+                        <mat-select>
+                          <mat-option>None</mat-option>
+                          <mat-option value="student">Student</mat-option>
+                          <mat-option value="professor">Professor</mat-option>
+                          <mat-option value="visitor">Visitor</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <mat-label>Birthday</mat-label>
+                        <input matInput [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Contact Email</mat-label>
+                        <input matInput >
+                    </mat-form-field> 
+                </div>
+            </div>    
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3"><button mat-raised-button color="primary">Save</button></div>
+                <div class="col-sm-3"><button mat-raised-button color="warn">Reset</button></div>
+            </div>        
+        </mat-card>
+    </div>
+    <div class="col-sm-2" ></div>
+</div>
+</form>
+
