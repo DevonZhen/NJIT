@@ -7,6 +7,12 @@ table {
     font-size: 14px;
     width: 100%;
   }
+  th{
+    background-color: rgb(112, 144, 233);
+    font-weight: bold;
+    color: black;
+    font-size: 90%;
+  }
 
 
  

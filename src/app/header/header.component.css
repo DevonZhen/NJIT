@@ -6,3 +6,7 @@
     background: linear-gradient(207deg, rgba(237,26,26,1) 0%, rgba(189,21,21,1) 89%);
     height:50px;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}

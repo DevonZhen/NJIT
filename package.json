@@ -30,6 +30,7 @@
     "font-awesome": "^4.7.0",
     "hammers": "^1.0.5",
     "http-request": "^0.7.0",
+    "ngx-mask": "^8.1.7",
     "ngx-show-hide-password": "^2.2.2",
     "ngx-take-until-destroy": "^5.4.0",
     "rest-services": "^0.2.0",

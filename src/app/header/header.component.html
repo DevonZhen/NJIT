@@ -1,19 +1,19 @@
 <div class="container-fluid">
-    <div class="row navbar " id="topnavbar">
+    <div class="row" id="topnavbar">
         <div class="col-sm-8">Welcome, Devon Zhen!</div>
         <div class="col-sm-2" style="text-align: right;">Dec 29, 2019 10:25:10AM</div>
         <div class="col-sm-2" style="text-align: right;">
-            <button mat-button>Login</button> &nbsp;|&nbsp;
+            <a routerLink="login"><button mat-button>Login</button></a> &nbsp;|&nbsp;
             <button mat-button>Sign Out</button>
         </div>
     </div>
-    <div class="row " id="bottomnavbar" >
+    <div class="row" id="bottomnavbar" >
         <div class="col-sm-4">Logo</div>
         <div class="col-sm-4" style="text-align: center;">
-            <i class="material-icons">person</i> Create Profile &nbsp;
-            <i class="material-icons">person</i> Update Profile &nbsp;
-            <i class="material-icons">person</i> Charts &nbsp;
-            <i class="material-icons">person</i> Dimploma &nbsp;
+            <a routerLink="personDetails"><i class="material-icons">person</i> Create Profile</a> &nbsp;
+            <a routerLink="personList"><i class="material-icons">person</i> Update Profile</a> &nbsp;
+            <a ><i class="material-icons">person</i> Charts </a> &nbsp;
+            <a ><i class="material-icons">person</i> Diploma </a> &nbsp;
         </div>
         <div class="col-sm-4" style="text-align: right;">
             <mat-form-field>
