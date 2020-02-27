@@ -4,9 +4,11 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+//ngx-mask Module
+import { NgxMaskModule } from 'ngx-mask';
 
 //Angular Specific
 import { MatButtonModule } from '@angular/material/button';
@@ -45,7 +47,8 @@ import { LoginComponent } from './login/login.component';
     MatButtonModule,MatInputModule,MatTableModule,MatSelectModule,MatIconModule,MatFormFieldModule,MatCardModule,MatDatepickerModule,MatNativeDateModule,
     HttpClientModule,
     ShowHidePasswordModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,ReactiveFormsModule,
+    NgxMaskModule.forRoot(),
     
   ],
   providers: [],

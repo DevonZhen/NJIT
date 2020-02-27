@@ -1,1 +1,13 @@
-<p>home works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <ng-container *ngFor="let img of img_list; let i = index">
+                <div class="slider" *ngIf="current == i" @fade >
+                    <img class="img" [src]="img">
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-sm-2" ></div>
+    </div>
+</div>

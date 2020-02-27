@@ -18,49 +18,49 @@
                     <div class="col-sm-3">
                         <mat-form-field class="example-full-width" >
                             <mat-label>User ID</mat-label>
-                            <input matInput formControlName="userId" required>
+                            <input matInput formControlName="userId" autocomplete="off" required>
+                            <mat-error>
+                                <span *ngIf="(userId.dirty || userId.touched) && userId.invalid && userId.errors.required">
+                                  User ID is required.
+                                </span>
+                              </mat-error>
                         </mat-form-field> 
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>First Name</mat-label>
-                            <input matInput formControlName="firstName" required>
-                            <mat-error>
-                                <span *ngIf="(firstName.dirty || firstName.touched) && firstName.invalid && firstName.errors.required">
-                                First is required.
-                                </span>
-                            </mat-error>
+                            <input matInput formControlName="firstName" autocomplete="off" required>
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact Name</mat-label>
-                            <input matInput formControlName="contactName" >
+                            <input matInput formControlName="contactName" autocomplete="off">
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Phone</mat-label>
-                            <input matInput formControlName="phone">
+                            <input matInput mask="(000) 000-0000" formControlName="phone" autocomplete="off">
                         </mat-form-field>
                         
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field class="full-width">
-                            <input id="password" type="password" placeholder="Password" matInput formControlName="password" showHideInput >
+                            <input id="password" type="password" placeholder="Password" matInput formControlName="password" showHideInput autocomplete="off">
                             <i class="material-icons" matSuffix showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Last Name</mat-label>
-                            <input matInput formControlName="lastName" required>
+                            <input matInput formControlName="lastName" autocomplete="off" required>
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact Relation</mat-label>
-                            <input matInput formControlName="contactRelation">
+                            <input matInput formControlName="contactRelation" autocomplete="off">
                         </mat-form-field>
                         <br>
                         <mat-form-field>
                             <mat-label>Phone Type</mat-label>
-                            <mat-select formControlName="phoneType">
+                            <mat-select formControlName="phoneType"> 
                             <mat-option>None</mat-option>
                             <mat-option value="home">Home</mat-option>
                             <mat-option value="cell">Cell</mat-option>
@@ -70,19 +70,35 @@
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field class="full-width">
-                            <input id="password" type="password" placeholder="Password" matInput formControlName="confirmPassword" showHideInput>
+                            <input id="password" type="password" placeholder="Password" matInput formControlName="confirmPassword" showHideInput autocomplete="off">
                             <i class="material-icons" matSuffix showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
+                            <mat-error *ngIf="(confirmPassword.dirty || confirmPassword.touched) && confirmPassword.invalid ">
+                                Passwords do not match
+                            </mat-error> 
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>SSN</mat-label>
-                            <input matInput formControlName="ssn" required>
+                            <input matInput  mask="000-00-0000" formControlName="ssn" required>
+                            <mat-error>
+                                <span *ngIf="(ssn.dirty || ssn.touched) && ssn.invalid && ssn.errors.required">
+                                  SSN is required.
+                                </span>
+                                <span *ngIf="(ssn.dirty || ssn.touched) && ssn.invalid">
+                                  SSN is invalid.
+                                </span>
+                              </mat-error>
                         </mat-form-field>
                         <br>
                         <mat-form-field class="example-full-width">
                             <mat-label>Contact Phone</mat-label>
-                            <input matInput formControlName="contactPhone">
+                            <input matInput mask="(000) 000-0000" formControlName="contactPhone">
                         </mat-form-field>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6"><a href="https:/google.com"><i class="material-icons" id="remove">remove_circle</i></a></div>
+                            <div class="col-sm-6"><a href="https:/google.com"><i class="material-icons" id="add">add_circle</i></a></div>
+                        </div>
                     </div>
                     <div class="col-sm-3">
                         <mat-form-field>
@@ -97,7 +113,8 @@
                         <br>
                         <mat-form-field>
                             <mat-label>Birthday</mat-label>
-                            <input matInput formControlName="birthday" [matDatepicker]="picker">
+                            <input matInput formControlName="birthday" mask="00/00/0000"> 
+                            <input matInput [hidden]="true" [matDatepicker]="picker" formControlName="datepicker" (dateChange)="onDateChange($event, 'birthday')">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -111,7 +128,10 @@
                 <div class="row">
                     <div class="col-sm-3"></div>
                     <div class="col-sm-3"></div>
-                    <div class="col-sm-3"><button mat-raised-button color="primary">Save</button></div>
+                    <div class="col-sm-3">
+                        <button mat-raised-button color="primary" *ngIf="updateFlag==false">Save</button>
+                        <button mat-raised-button color="primary" *ngIf="updateFlag==true">Update</button>
+                    </div>
                     <div class="col-sm-3"><button mat-raised-button color="warn">Reset</button></div>
                 </div>        
             </mat-card>

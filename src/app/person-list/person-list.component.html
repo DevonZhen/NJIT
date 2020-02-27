@@ -32,9 +32,12 @@
               <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
             </ng-container>
             
+            <!-- [routerLink]="['/personDetail', element.ssn]" -->
             <ng-container matColumnDef="ssn">
               <th mat-header-cell *matHeaderCellDef> SSN </th>
-              <td mat-cell *matCellDef="let element"> <a href="https://google.com"> {{element.ssn}} </a></td>
+              <td mat-cell *matCellDef="let element">
+                <a [routerLink]="['/personDetails', element.ssn]" > {{element.ssn}} </a>
+              </td>
             </ng-container>
             
             <ng-container matColumnDef="birthDay">

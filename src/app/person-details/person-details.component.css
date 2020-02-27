@@ -4,3 +4,14 @@ mat-form-field{
 #matcardheader{
     background-color: rgb(112, 144, 233);
 }
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+#remove{
+    color: rgb(226, 40, 40);
+}
+#add{
+    color: rgb(53, 53, 194);
+}
