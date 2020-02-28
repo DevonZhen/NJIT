@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { RestfulService } from './../services/restful.service'
 import { matchValues } from './../../directives/match-values'
 
@@ -33,8 +33,8 @@ export class PersonDetailsComponent implements OnInit {
     console.log("Start Here!");
     this.buildDetailForm()
     console.log("SSN: "+this.getSSN())
-    // this.getPersonType()
-    // this.getPhoneType()
+    this.getPersonType()
+    this.getPhoneType()
     // if (this.getSSN() != null) {
     //     this.getPersonDetail(this.getSSN());
     //     this.updateFlag=true;
@@ -138,13 +138,22 @@ export class PersonDetailsComponent implements OnInit {
       'contactRelation': data.emgContact.ctRelation,
       'contactPhone': data.emgContact.ctPhone,
       'contactEmail': data.emgContact.ctEmail
-    }); 
+    });
+    data.phones.forEach(item => {
+      const phone = this.formBuilder.group({ 
+        'phone': item.phone,
+        'phoneType': item.phoneType.type,
+      })
+      this.phones.push(phone);
+    });
   }
 
   //Getting SSN from the Person List page
   getSSN(){
     return this.route.snapshot.paramMap.get('ssn');
   }
+
+
 
   //Converts datepicker into normal input (2 inputs overlaying)
   onDateChange(event: any, component: any) {
@@ -156,7 +165,28 @@ export class PersonDetailsComponent implements OnInit {
   //   return this.detailForm.get('firstName');
   // }
 
- 
+ /*-------------------
+  Adding Phone 
+  --------------------*/
+
+  get phones() {
+    return this.detailForm.get('phoneArray') as FormArray
+  }
+
+  //Adds Phone & Phone Type below
+  addPhone() {
+    const phone = this.formBuilder.group({ 
+      phone: [],
+      phoneType: [],
+    })
+    this.phones.push(phone);
+  }
+
+  //Delets specific row with Phone & Phone Type
+  delPhone(i: any) {
+    this.phones.removeAt(i);
+  }
+
 
   onSubmit() {
     //Display Reactive Form's JSON Values
