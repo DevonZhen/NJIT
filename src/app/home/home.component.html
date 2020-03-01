@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <ng-container *ngFor="let img of img_list; let i = index">
@@ -7,6 +7,31 @@
                     <img class="img" [src]="img">
                 </div>
             </ng-container>
+        </div>
+        <div class="col-sm-2" ></div>
+    </div> -->
+
+
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <ngb-carousel>
+                <ng-template ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img src="assets/images/Building.jpg">
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                  <div class="picsum-img-wrapper">
+                    <img src="assets/images/Campus.jpg">
+                  </div>
+                </ng-template>
+                <ng-template ngbSlide>
+                    <div class="picsum-img-wrapper">
+                      <img src="assets/images/Homecoming.jpg">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
         </div>
         <div class="col-sm-2" ></div>
     </div>

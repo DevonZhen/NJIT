@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //ngx-mask Module
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -49,6 +49,7 @@ import { LoginComponent } from './login/login.component';
     ShowHidePasswordModule,
     FormsModule,ReactiveFormsModule,
     NgxMaskModule.forRoot(),
+    NgbModule,
     
   ],
   providers: [],

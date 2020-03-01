@@ -1,10 +1,18 @@
 #topnavbar{
     background: linear-gradient(to right, rgba(189,21,21,1), #ff4b2b);
     height:40px;
+    font-family: 'Poppins';
 }
 #bottomnavbar{
     background: linear-gradient(207deg, rgba(237,26,26,1) 0%, rgba(189,21,21,1) 89%);
     height:50px;
+}
+#bottomnavbar a{
+    font-family: 'Poppins';
+    color: yellow;
+}
+#bottomnavbar .material-icons{
+    color: rgb(32, 202, 32);
 }
 a{
     text-decoration: none;
@@ -18,11 +26,4 @@ a{
 img{
     height: 50px;
     width: auto;
-}
-#bottomnavbar a{
-    font-family: 'Poppins';
-    color: yellow;
-}
-#bottomnavbar .material-icons{
-    color: rgb(32, 202, 32);
 }

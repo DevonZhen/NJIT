@@ -27,7 +27,9 @@ export class PersonDetailsComponent implements OnInit {
   phoneTypes: PHONE_TYPE[];
   detailForm: FormGroup;
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder,private restService: RestfulService) { }
+  constructor(private route: ActivatedRoute,
+              private formBuilder: FormBuilder,
+              private restService: RestfulService) { }
 
   ngOnInit(): void {
     console.log("Start Here!");
@@ -35,10 +37,11 @@ export class PersonDetailsComponent implements OnInit {
     console.log("SSN: "+this.getSSN())
     this.getPersonType()
     this.getPhoneType()
-    // if (this.getSSN() != null) {
-    //     this.getPersonDetail(this.getSSN());
-    //     this.updateFlag=true;
-    // }
+    //If SSN is there, load data into Details Form
+    if (this.getSSN() != null) {
+        this.getPersonDetail(this.getSSN());
+        this.updateFlag=true;
+    }
   }
 
   buildDetailForm() {
@@ -56,8 +59,8 @@ export class PersonDetailsComponent implements OnInit {
       contactRelation: this.formBuilder.control(''),
       contactPhone: this.formBuilder.control(''),
       contactEmail: this.formBuilder.control('', [Validators.required]),
-      phone: this.formBuilder.control(''), //temp
-      phoneType: this.formBuilder.control(''), //temp
+      // phone: this.formBuilder.control(''), //temp
+      // phoneType: this.formBuilder.control(''), //temp
       phoneArray: this.constructPhoneArray()
     });
   }
@@ -82,9 +85,17 @@ export class PersonDetailsComponent implements OnInit {
     return this.detailForm.get('contactEmail');
   }
   constructPhoneArray() {
+    var formArray = this.formBuilder.array([]);
+    if (this.getSSN() == null) {
+        formArray.push(this.formBuilder.group({
+          phone: [''],
+          phoneType: [''],
+        }));
+    }
+    return formArray;
   }
   
-  //Loads the JSON/Dynamic data from Restful <All Data?
+  //Loads the JSON/Dynamic data from Restful <All Data>
   getPersonDetail(id: any){
     this.restService.getPersonDetailData(id)
     .subscribe(
@@ -92,7 +103,7 @@ export class PersonDetailsComponent implements OnInit {
         this.loadDetailForm(data);
       },
       err => {
-        console.log("Error occured: getPersonDeital()")
+        console.log("Error occured: getPersonDetails()")
       }
     );
   }
@@ -153,14 +164,12 @@ export class PersonDetailsComponent implements OnInit {
     return this.route.snapshot.paramMap.get('ssn');
   }
 
-
-
   //Converts datepicker into normal input (2 inputs overlaying)
   onDateChange(event: any, component: any) {
     this.detailForm.get(component).setValue(formatDate(event.target.value, 'MM/dd/yyyy', 'en-US'));
   }  
 
-  //Basic Syntax example for getting data from form
+  //Basic Syntax example for getting data from form function
   // get firstName() {
   //   return this.detailForm.get('firstName');
   // }
@@ -169,6 +178,7 @@ export class PersonDetailsComponent implements OnInit {
   Adding Phone 
   --------------------*/
 
+  //Retrieve the phone array data
   get phones() {
     return this.detailForm.get('phoneArray') as FormArray
   }
@@ -182,11 +192,10 @@ export class PersonDetailsComponent implements OnInit {
     this.phones.push(phone);
   }
 
-  //Delets specific row with Phone & Phone Type
+  //Deletes specific row with Phone & Phone Type
   delPhone(i: any) {
     this.phones.removeAt(i);
   }
-
 
   onSubmit() {
     //Display Reactive Form's JSON Values
