@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { RestfulService } from './../services/restful.service'
 import { matchValues } from './../../directives/match-values'
 
@@ -44,26 +44,88 @@ export class PersonDetailsComponent implements OnInit {
     }
   }
 
-  buildDetailForm() {
+  // Old Syntax
+  // buildDetailForm() {
+  //   this.detailForm = this.formBuilder.group({
+  //     userId: this.formBuilder.control('',[Validators.required]),
+  //     password: this.formBuilder.control('',[Validators.required]),
+  //     confirmPassword: this.formBuilder.control('',[matchValues('password')]),
+  //     personType: this.formBuilder.control(''),
+  //     firstName: this.formBuilder.control(''),
+  //     lastName: this.formBuilder.control(''),
+  //     ssn: this.formBuilder.control('', [Validators.required]),
+  //     birthday: this.formBuilder.control(''),
+
+  //     street: this.formBuilder.control(''),
+  //     city: this.formBuilder.control(''),
+  //     state: this.formBuilder.control(''),
+  //     zip: this.formBuilder.control(''),
+      
+  //     datepicker: this.formBuilder.control(''),
+  //     contactName: this.formBuilder.control(''),
+  //     contactRelation: this.formBuilder.control(''),
+  //     contactPhone: this.formBuilder.control(''),
+  //     contactEmail: this.formBuilder.control(''),
+  //     // phone: this.formBuilder.control(''), //temp
+  //     // phoneType: this.formBuilder.control(''), //temp
+  //     phoneArray: this.constructPhoneArray()
+  //   });
+  // }
+
+  //Better Syntax
+  // buildDetailForm(){
+  //   this.detailForm =new FormGroup({
+  //     userId: new FormControl('', Validators.required),
+  //     password: new FormControl('', Validators.required),
+  //     confirmPassword: new FormControl('', matchValues('password')),
+  //     personType: new FormControl('', Validators.required),
+  //     firstName: new FormControl(''),
+  //     lastName: new FormControl(''),
+  //     ssn: new FormControl('', Validators.required),
+  //     birthday: new FormControl(''),
+  //     datepicker: new FormControl(''),
+  //     address:new FormGroup({
+  //       street: new FormControl(''),
+  //       city: new FormControl(''),
+  //       state: new FormControl(''),
+  //       zip: new FormControl(''),
+  //     }),
+  //     contactName:new FormControl(''),
+  //     contactRelation: new FormControl(''),
+  //     contactPhone: new FormControl(''),
+  //     contactEmail: new FormControl(''),
+  //     phoneArray: this.constructPhoneArray()
+  //   });
+  // }
+
+  //Updated Syntax for Angular 8/9
+  buildDetailForm(){
     this.detailForm = this.formBuilder.group({
-      userId: this.formBuilder.control('',[Validators.required]),
-      password: this.formBuilder.control('',[Validators.required]),
-      confirmPassword: this.formBuilder.control('',[matchValues('password')]),
-      personType: this.formBuilder.control(''),
-      firstName: this.formBuilder.control(''),
-      lastName: this.formBuilder.control(''),
-      ssn: this.formBuilder.control('', [Validators.required]),
-      birthday: this.formBuilder.control(''),
-      datepicker: this.formBuilder.control(''),
-      contactName: this.formBuilder.control(''),
-      contactRelation: this.formBuilder.control(''),
-      contactPhone: this.formBuilder.control(''),
-      contactEmail: this.formBuilder.control('', [Validators.required]),
-      // phone: this.formBuilder.control(''), //temp
-      // phoneType: this.formBuilder.control(''), //temp
+      userId: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', matchValues('password')],
+      personType: [''],
+      firstName: [''],
+      lastName: [''],
+      ssn: ['', Validators.required],
+      birthday: [''],
+      datepicker: [''],
+      address:this.formBuilder.group({
+        street: [''],
+        city: [''],
+        state: [''],
+        zip: [''],
+      }),
+      contactName: [''],
+      contactRelation: [''],
+      contactPhone: [''],
+      contactEmail: [''],
       phoneArray: this.constructPhoneArray()
     });
   }
+  
+ 
+
 
   //Retrieves data from the reactive form holding
   get userId() {

@@ -9,7 +9,8 @@ import * as moment from 'moment';
 export class HeaderComponent implements OnInit {
 
   currentTime: string = moment().format('MMMM Do YYYY, h:mm a');  
-
+  visibility:boolean = false;
+  
   constructor() { }
 
   ngOnInit(): void {

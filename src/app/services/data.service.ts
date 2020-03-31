@@ -11,6 +11,13 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
 
+  //Login (specifically)
+  getPersonByUidandPwd(uid:any, pwd:any): Observable<any>{
+    //return this.http.get(this.url+"/phonetype.json");
+    return this.http.get(this.hostURL+"/personByUidandPwd/"+uid+"/"+pwd)
+  }
+
+
   //Collects Data from JSON <personall> or from DB
   getPersonAllData(): Observable<any>{
     return this.http.get("assets/personall.json");
@@ -34,5 +41,16 @@ export class DataService {
     return this.http.get("assets/phonetype.json");
     // return this.http.get(this.hostURL+"/phoneTypes")
   }
+
+  //Insert/Post a person & its data
+  postPerson(formData: any): Observable<any>{
+    return this.http.post(this.hostURL+"/postPerson", formData);
+  }  
+
+  //Delete a person & its data
+  deletePerson(id: string): Observable<any>{
+    return this.http.delete(this.hostURL+"/deletePerson/"+id);
+  } 
+  
 
 }
