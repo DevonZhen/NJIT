@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
+import { loginService } from '../services/login.service';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -9,11 +12,17 @@ import * as moment from 'moment';
 export class HeaderComponent implements OnInit {
 
   currentTime: string = moment().format('MMMM Do YYYY, h:mm a');  
-  visibility:boolean = false;
+  public visibility:boolean = true;
+  data:any;
   
-  constructor() { }
+  constructor(private ls: loginService) { 
+    // this.ls.setData(false);
+  }
 
   ngOnInit(): void {
+    
+    this.data = this.ls.getData();
   }
+
 
 }

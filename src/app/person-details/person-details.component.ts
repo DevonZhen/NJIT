@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { RestfulService } from './../services/restful.service'
 import { matchValues } from './../../directives/match-values'
 
@@ -29,12 +30,13 @@ export class PersonDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar,
               private restService: RestfulService) { }
 
   ngOnInit(): void {
-    console.log("Start Here!");
+    console.log("(Person Details) Starts Here!");
     this.buildDetailForm()
-    console.log("SSN: "+this.getSSN())
+    console.log("(Person Details) SSN: "+this.getSSN())
     this.getPersonType()
     this.getPhoneType()
     //If SSN is there, load data into Details Form
@@ -42,92 +44,97 @@ export class PersonDetailsComponent implements OnInit {
         this.getPersonDetail(this.getSSN());
         this.updateFlag=true;
     }
+    
   }
 
-  // Old Syntax
-  // buildDetailForm() {
-  //   this.detailForm = this.formBuilder.group({
-  //     userId: this.formBuilder.control('',[Validators.required]),
-  //     password: this.formBuilder.control('',[Validators.required]),
-  //     confirmPassword: this.formBuilder.control('',[matchValues('password')]),
-  //     personType: this.formBuilder.control(''),
-  //     firstName: this.formBuilder.control(''),
-  //     lastName: this.formBuilder.control(''),
-  //     ssn: this.formBuilder.control('', [Validators.required]),
-  //     birthday: this.formBuilder.control(''),
+/*Old Syntax
+  
+  buildDetailForm() {
+    this.detailForm = this.formBuilder.group({
+      userId: this.formBuilder.control('',[Validators.required]),
+      password: this.formBuilder.control('',[Validators.required]),
+      confirmPassword: this.formBuilder.control('',[matchValues('password')]),
+      personType: this.formBuilder.control(''),
+      firstName: this.formBuilder.control(''),
+      lastName: this.formBuilder.control(''),
+      ssn: this.formBuilder.control('', [Validators.required]),
+      birthday: this.formBuilder.control(''),
 
-  //     street: this.formBuilder.control(''),
-  //     city: this.formBuilder.control(''),
-  //     state: this.formBuilder.control(''),
-  //     zip: this.formBuilder.control(''),
+      street: this.formBuilder.control(''),
+      city: this.formBuilder.control(''),
+      state: this.formBuilder.control(''),
+      zip: this.formBuilder.control(''),
       
-  //     datepicker: this.formBuilder.control(''),
-  //     contactName: this.formBuilder.control(''),
-  //     contactRelation: this.formBuilder.control(''),
-  //     contactPhone: this.formBuilder.control(''),
-  //     contactEmail: this.formBuilder.control(''),
-  //     // phone: this.formBuilder.control(''), //temp
-  //     // phoneType: this.formBuilder.control(''), //temp
-  //     phoneArray: this.constructPhoneArray()
-  //   });
-  // }
+      datepicker: this.formBuilder.control(''),
+      contactName: this.formBuilder.control(''),
+      contactRelation: this.formBuilder.control(''),
+      contactPhone: this.formBuilder.control(''),
+      contactEmail: this.formBuilder.control(''),
+      // phone: this.formBuilder.control(''), //temp
+      // phoneType: this.formBuilder.control(''), //temp
+      phoneArray: this.constructPhoneArray()
+    });
+  }
 
-  //Better Syntax
-  // buildDetailForm(){
-  //   this.detailForm =new FormGroup({
-  //     userId: new FormControl('', Validators.required),
-  //     password: new FormControl('', Validators.required),
-  //     confirmPassword: new FormControl('', matchValues('password')),
-  //     personType: new FormControl('', Validators.required),
-  //     firstName: new FormControl(''),
-  //     lastName: new FormControl(''),
-  //     ssn: new FormControl('', Validators.required),
-  //     birthday: new FormControl(''),
-  //     datepicker: new FormControl(''),
-  //     address:new FormGroup({
-  //       street: new FormControl(''),
-  //       city: new FormControl(''),
-  //       state: new FormControl(''),
-  //       zip: new FormControl(''),
-  //     }),
-  //     contactName:new FormControl(''),
-  //     contactRelation: new FormControl(''),
-  //     contactPhone: new FormControl(''),
-  //     contactEmail: new FormControl(''),
-  //     phoneArray: this.constructPhoneArray()
-  //   });
-  // }
+  Better Syntax (Using FormControl)
+  buildDetailForm(){
+    this.detailForm =new FormGroup({
+      userId: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      confirmPassword: new FormControl('', matchValues('password')),
+      personType: new FormControl('', Validators.required),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      ssn: new FormControl('', Validators.required),
+      birthday: new FormControl(''),
+      datepicker: new FormControl(''),
+      address:new FormGroup({
+        street: new FormControl(''),
+        city: new FormControl(''),
+        state: new FormControl(''),
+        zip: new FormControl(''),
+      }),
+      contactName:new FormControl(''),
+      contactRelation: new FormControl(''),
+      contactPhone: new FormControl(''),
+      contactEmail: new FormControl(''),
+      phoneArray: this.constructPhoneArray()
+    });
+  }
+  */
 
-  //Updated Syntax for Angular 8/9
+  //Updated Syntax for Angular 8/9 (Using FormBuilder)
   buildDetailForm(){
     this.detailForm = this.formBuilder.group({
+      id: [''],
       userId: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', matchValues('password')],
-      personType: [''],
+      pertId: [''],
       firstName: [''],
       lastName: [''],
       ssn: ['', Validators.required],
-      birthday: [''],
-      datepicker: [''],
-      address:this.formBuilder.group({
+      birthDay: [new Date()],
+      address: this.formBuilder.group({
+        id: [''],
         street: [''],
         city: [''],
         state: [''],
         zip: [''],
       }),
-      contactName: [''],
-      contactRelation: [''],
-      contactPhone: [''],
-      contactEmail: [''],
-      phoneArray: this.constructPhoneArray()
+      emgContact: this.formBuilder.group({
+        id: [''],
+        contactName: [''],
+        contactRelation: [''],
+        contactPhone: [''],
+        contactEmail: [''],
+      }),
+      phones: this.constructPhoneArray()
     });
   }
   
- 
-
-
-  //Retrieves data from the reactive form holding
+  //Retrieves data from the reactive form holding 
+  //Also used only for validation
   get userId() {
     return this.detailForm.get('userId');
   }
@@ -144,12 +151,13 @@ export class PersonDetailsComponent implements OnInit {
     return this.detailForm.get('ssn');
   }
   get contactEmail() {
-    return this.detailForm.get('contactEmail');
+    return this.detailForm.get('emgContact').get('contactEmail');
   }
   constructPhoneArray() {
     var formArray = this.formBuilder.array([]);
     if (this.getSSN() == null) {
         formArray.push(this.formBuilder.group({
+          id: [''],
           phone: [''],
           phoneType: [''],
         }));
@@ -163,9 +171,10 @@ export class PersonDetailsComponent implements OnInit {
     .subscribe(
       data => { 
         this.loadDetailForm(data);
+        console.log("details=="+JSON.stringify(data))
       },
       err => {
-        console.log("Error occured: getPersonDetails()")
+        console.log("Error occured: getPersonDetails() Failed")
       }
     );
   }
@@ -176,9 +185,10 @@ export class PersonDetailsComponent implements OnInit {
     .subscribe(
       data => { 
         this.personTypes = data;
+        console.log("Deez variables"+JSON.stringify(data));
       },
       err => {
-        console.log("Error occured: personType() failed")
+        console.log("(Person Detail) Error occured: personType() failed")
       }
     );
   }
@@ -191,7 +201,7 @@ export class PersonDetailsComponent implements OnInit {
         this.phoneTypes = data;
       },
       err => {
-        console.log("Error occured: phoneType() failed")
+        console.log("(Person Detail) Error occured: phoneType() failed")
       }
     );
   }
@@ -199,23 +209,35 @@ export class PersonDetailsComponent implements OnInit {
   loadDetailForm(data: any) {
     //Initial Detail Fields
     this.detailForm.patchValue({
+      'id': data.id,
       'userId': data.userId,
       'password': data.password,
       'confirmPassword': data.password,
-      'personType': data.personType.type,
+      'pertId': data.pertId, 
       'firstName': data.firstName,
       'lastName': data.lastName,
       'ssn': data.ssn,
-      'birthday': data.birthDay,
-      'contactName': data.emgContact.ctName,
-      'contactRelation': data.emgContact.ctRelation,
-      'contactPhone': data.emgContact.ctPhone,
-      'contactEmail': data.emgContact.ctEmail
+      'birthDay': formatDate(data.birthDay, 'yyyy-MM-ddT00:00:00', 'en-US'),
+      'address': {
+        'id': data.address.id,
+        'street': data.address.street,
+        'city': data.address.city,
+        'state': data.address.state,
+        'zip': data.address.zip,
+      },
+      'emgContact':{
+        'id': data.emgContact.id,
+        'contactName': data.emgContact.contactName,
+        'contactRelation': data.emgContact.contactRelation,
+        'contactPhone': data.emgContact.contactPhone,
+        'contactEmail': data.emgContact.contactEmail
+      },
     });
     data.phones.forEach(item => {
-      const phone = this.formBuilder.group({ 
+      const phone = this.formBuilder.group({
+        'id': item.id,
         'phone': item.phone,
-        'phoneType': item.phoneType.type,
+        'phoneType': item.phoneType,
       })
       this.phones.push(phone);
     });
@@ -225,11 +247,8 @@ export class PersonDetailsComponent implements OnInit {
   getSSN(){
     return this.route.snapshot.paramMap.get('ssn');
   }
-
-  //Converts datepicker into normal input (2 inputs overlaying)
-  onDateChange(event: any, component: any) {
-    this.detailForm.get(component).setValue(formatDate(event.target.value, 'MM/dd/yyyy', 'en-US'));
-  }  
+  
+  // serializedDate = new FormControl((new Date()).toISOString());
 
   //Basic Syntax example for getting data from form function
   // get firstName() {
@@ -242,7 +261,7 @@ export class PersonDetailsComponent implements OnInit {
 
   //Retrieve the phone array data
   get phones() {
-    return this.detailForm.get('phoneArray') as FormArray
+    return this.detailForm.get('phones') as FormArray
   }
 
   //Adds Phone & Phone Type below
@@ -262,6 +281,31 @@ export class PersonDetailsComponent implements OnInit {
   onSubmit() {
     //Display Reactive Form's JSON Values
     console.log("Form Data: "+JSON.stringify(this.detailForm.value));
+    this.postPerson(this.detailForm.value);
 
   }
+
+  postPerson(formValue: any) {
+    this.restService.postPerson(formValue)
+    .subscribe(
+      data  => {
+         if (data) {
+            this.snackBar.open("Person data has been saved successfully!", 'close',  {
+              duration: 5000,
+              panelClass: ['mat-toolbar', 'mat-primary'] // 'mat-accent' or 'mat-warn'
+            });
+         } else {
+            this.snackBar.open("Person data has been saved successfully!", 'close',  {
+              duration: 5000,
+              panelClass: ['mat-toolbar', 'mat-warn'] // 'mat-accent' or 'mat-warn'
+            });
+         }
+         console.log("POST Request is successful ", data);
+      },
+      error  => {
+        console.log("Error postPerson()", error);
+      }
+    );  
+  }
+
 }

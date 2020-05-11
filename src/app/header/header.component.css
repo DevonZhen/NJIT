@@ -16,7 +16,10 @@
 }
 a{
     text-decoration: none;
-    color: inherit;
+    color: inherit; 
+}
+button{
+    outline: none;
 }
 #headercontent{
     text-align: center;

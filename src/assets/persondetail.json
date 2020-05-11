@@ -1,7 +1,41 @@
 {
-    "id":1,"userId":"JZHEN","password":"123","firstName":"Jack","lastName":"Zhen","ssn":123456789,"birthDay":"10/26/1996",
-    "personType":{"id":1,"type":"Student"},
-    "emgContact":{"id":1,"ctName":"Karena","ctRelation":"Spouse","ctPhone":"(701) 324-2234","ctEmail":"karena@gmail.com"},
-    "phones":[{"id":1,"phone":"(212) 123-3456","phoneType":{"id":1,"type":"Home"}},
-              {"id":2,"phone":"(609) 456-7896","phoneType":{"id":2,"type":"Cell"}}]
+    "id":1,
+    "userId":"JZHEN",
+    "password":"123",
+    "firstName":"Jack",
+    "lastName":"Zhen",
+    "ssn":123456789,
+    "birthDay":"10/26/1996",
+    "personType":
+       {
+        "id":1,
+        "type":"Student"
+       },
+    "address":
+        {
+        "id":1,
+        "street":"13 Timesquare Rd.",
+        "city":"Brooklyn",
+        "state":"NY",
+        "zip":"11549"
+        },
+    "emgContact":
+       {
+        "id":1,
+        "contactName":"Karena",
+        "contactRelation":"Spouse",
+        "contactPhone":"(701) 324-2234",
+        "contactEmail":"karena@gmail.com"
+       },
+    "phones":
+       [{
+         "id":1,
+         "phone":"(410) 123-3456",
+         "phoneType":"Home" 
+        },
+        {
+         "id":2,
+         "phone":"(609) 456-7896",
+         "phoneType":"Cell"
+        }]
    }

@@ -24,37 +24,58 @@ import { RestfulService } from './../services/restful.service';
 //   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
 // ];
 
+export interface PERSON_TYPE {
+  id: number;
+  type: string;
+}
+
 @Component({
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
   styleUrls: ['./person-list.component.css']
 })
 export class PersonListComponent implements OnInit {
+  personTypes: PERSON_TYPE[];
 
   constructor(private router: Router, private route: ActivatedRoute, private restService: RestfulService) { }
   // constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.getPersonAll();
+    this.getPersonTypes();
   }
 
   // //Static
   // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  //Define the table's column names
   displayedColumns: string[] = ['firstName','lastName','ssn','birthDay','personType','phone','delete'];
   dataSource = new MatTableDataSource();
 
   getPersonAll() {
-    console.log("Hello First");
+    console.log("(Person List) Starts Here");
     this.restService.getPersonAllData()
     .subscribe(
       data => { 
         this.dataSource.data = data;
-        console.log("Data: "+JSON.stringify(data));
+        console.log("(Person List) Data: "+JSON.stringify(data));
       },
       err => {
         console.log("Error occured: getPersonAll()")
+      }
+    );
+  }
+
+  getPersonTypes() {
+    this.restService.getPersonTypeData()
+    .subscribe(
+      data => { 
+        this.personTypes = data;
+        console.log("(Person List) data =="+ JSON.stringify(data))
+      },
+      err => {
+        console.log("Error occured: getPersonType()" + err)
       }
     );
   }
@@ -63,6 +84,20 @@ export class PersonListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }  
 
+
+  onClickDelete(id: string) {
+    console.log("delete id: "+id)
+    this.restService.deletePerson(id)
+    .subscribe(
+      data => { 
+        this.getPersonAll();
+        this.getPersonTypes();
+      },
+      err => {
+        console.log("Error occured: getPersonDeital()" + err)
+      }
+    );
+  }
 
   //Static's Filter
   // applyFilter(event: Event) {

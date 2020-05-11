@@ -5,6 +5,7 @@
       <div class="col-sm-8" style="text-align: center;" > <h1>Person List</h1></div>
       <div class="col-sm-2" ></div>
   </div>
+  <br>
   <div class="row">
       <div class="col-sm-2"></div>
       <div class="col-sm-8">
@@ -15,7 +16,7 @@
               <div class="col-sm-4" style="text-align: right;">
                   <mat-form-field>
                       <mat-label>Filter</mat-label>
-                      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Person">
+                      <input matInput (keyup)="applyFilter($event.target.value)" autocomplete="off">
                   </mat-form-field>
               </div>
           </div>
@@ -42,26 +43,35 @@
             
             <ng-container matColumnDef="birthDay">
               <th mat-header-cell *matHeaderCellDef> Birthday </th>
-              <td mat-cell *matCellDef="let element"> {{element.birthDay}} </td>
+              <td mat-cell *matCellDef="let element">{{element.birthDay}}</td>
             </ng-container>
             
             <ng-container matColumnDef="personType">
               <th mat-header-cell *matHeaderCellDef> Person Type </th>
-              <td mat-cell *matCellDef="let element"> {{element.personType.type}} </td>
+              <td mat-cell *matCellDef="let element"> 
+                <span *ngFor="let personType of personTypes">
+                  <span *ngIf="personType.id==element.pertId">{{personType.type}}</span>
+                </span> 
+              </td>
             </ng-container>
             
             <ng-container matColumnDef="phone">
               <th mat-header-cell *matHeaderCellDef> Phone </th>
               <td mat-cell *matCellDef="let element; let i = index">
                 <span *ngFor="let item of element.phones; let num = index">
-                {{item.phone}}&nbsp; &nbsp;{{item.phoneType.type}} <br>
+                {{item.phone}}&nbsp; &nbsp;{{item.phoneType}} <br>
                 </span>
               </td>
             </ng-container>
             
             <ng-container matColumnDef="delete">
               <th mat-header-cell *matHeaderCellDef> Delete </th>
-              <td mat-cell *matCellDef="let element">&nbsp;&nbsp;<a href="https://google.com"><i class="material-icons" style="color: red;">delete</i></a></td>
+              <td mat-cell *matCellDef="let element">
+                &nbsp;&nbsp;
+                <a (click)="onClickDelete(element.id)" >
+                  <i class="material-icons" style="color: red; cursor:pointer">delete</i>
+                </a>
+              </td>
             </ng-container>
             
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

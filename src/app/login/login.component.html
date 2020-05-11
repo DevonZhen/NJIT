@@ -5,6 +5,7 @@
         <div class="col-sm-4"><mat-card id="loginmatcardheader"></mat-card></div>
         <div class="col-sm-4"></div>
     </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="col-sm-4"></div>
         <div class="col-sm-4" >
@@ -15,9 +16,9 @@
                 <div class="row" style="text-align: center;">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8" >
-                        <mat-form-field class="example-full-width" id="logindetails">
-                            <mat-label>First</mat-label>
-                            <input matInput>
+                        <mat-form-field class="full-width" id="logindetails">
+                            <mat-label>Username</mat-label>
+                            <input matInput  formControlName="userId" autocomplete="off">
                         </mat-form-field>
                     </div>
                     <div class="col-sm-2"></div>
@@ -26,7 +27,7 @@
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
                         <mat-form-field class="full-width" id="logindetails">
-                            <input id="password" type="password" placeholder="Password" matInput showHideInput >
+                            <input matInput id="password" type="password" placeholder="Password" formControlName="password" autocomplete="off" showHideInput >
                             <i class="material-icons" matSuffix showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
                         </mat-form-field> 
                     </div>
@@ -49,4 +50,5 @@
         </div>
         <div class="col-sm-4" ></div>
     </div>
+    </form>
 </div>

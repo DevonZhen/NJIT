@@ -44,13 +44,13 @@
                         <div class="col-sm-3">
                             <mat-form-field>
                                 <mat-label>Person Type</mat-label>
-                                <mat-select formControlName="personType">
+                                <mat-select formControlName="pertId" required>
                                     <!-- Static Version
                                     <mat-option>None</mat-option>
                                     <mat-option value="student">Student</mat-option>
                                     <mat-option value="professor">Professor</mat-option>
                                     <mat-option value="visitor">Visitor</mat-option> -->
-                                    <mat-option [value]="personType.type" *ngFor="let personType of personTypes"  required>
+                                    <mat-option [value]="personType.id" *ngFor="let personType of personTypes">
                                         {{personType.type}}
                                     </mat-option>
                                 </mat-select>
@@ -87,8 +87,7 @@
                         <div class="col-sm-3">
                             <mat-form-field>
                                 <mat-label>Birthday</mat-label>
-                                <input matInput formControlName="birthday" mask="00/00/0000"> 
-                                <input matInput [hidden]="true" [matDatepicker]="picker" formControlName="datepicker" (dateChange)="onDateChange($event, 'birthday')">
+                                <input matInput [matDatepicker]="picker" formControlName="birthDay">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -124,6 +123,7 @@
                     </div>
                     </div>
                     <!-- Contact Information-->
+                    <div formGroupName="emgContact">
                     <div class="row">
                         <div class="col-sm-3">
                             <mat-form-field class="full-width">
@@ -140,7 +140,7 @@
                         <div class="col-sm-3">
                             <mat-form-field class="full-width">
                                 <mat-label>Contact Phone</mat-label>
-                                <input matInput mask="(000) 000-0000" formControlName="contactPhone">
+                                <input matInput mask="(000) 000-0000" formControlName="contactPhone" autocomplete="off">
                             </mat-form-field>
                         </div>
                         <div class="col-sm-3">
@@ -155,20 +155,21 @@
                             </mat-form-field> 
                         </div>
                     </div>
-                    
+                    </div>
                     <!-- Dynamic Phone Addition/Subtraction-->
-                    <div formArrayName="phoneArray">
+                    <div formArrayName="phones">
                         <div class="row" *ngFor="let phone of phones.controls; let i=index" [formGroupName]="i">
                             <div class="col-sm-3">
                                 <mat-form-field class="full-width">
                                     <mat-label>Phone</mat-label>
-                                    <mat-label *ngIf="i!=0">&nbsp;</mat-label>
+                                    <mat-label >&nbsp;</mat-label>
                                     <input matInput mask="(000) 000-0000" formControlName="phone" autocomplete="off">
                                 </mat-form-field>
                             </div>
                             <div class="col-sm-3">
                                 <mat-form-field>
                                     <mat-label>Phone Type</mat-label>
+                                    <mat-label >&nbsp;</mat-label>
                                     <mat-select formControlName="phoneType"> 
                                     <!-- Static Version
                                     <mat-option>None</mat-option>
@@ -200,7 +201,7 @@
                             <button mat-raised-button color="primary" *ngIf="updateFlag==true">Update</button>
                         </div>
                         <div class="col-sm-3">
-                            <button mat-raised-button color="warn">Reset</button>
+                            <button mat-raised-button color="warn" (click)="detailForm.reset()">Reset</button>
                         </div>
                     </div>
                 </mat-card>

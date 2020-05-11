@@ -7,6 +7,7 @@ import { ShowHidePasswordModule } from 'ngx-show-hide-password';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 //ngx-mask Module
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -20,7 +21,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar'; 
 
 //Component Specific
 import { HeaderComponent } from './header/header.component';
@@ -29,6 +30,9 @@ import { PersonDetailsComponent } from './person-details/person-details.componen
 import { HomeComponent } from './home/home.component';
 import { PersonListComponent } from './person-list/person-list.component';
 import { LoginComponent } from './login/login.component';
+import { loginService } from './services/login.service';
+import { ChartsComponent } from './charts/charts.component';
+import { DiplomaComponent } from './diploma/diploma.component';
 
 @NgModule({
   declarations: [
@@ -38,13 +42,16 @@ import { LoginComponent } from './login/login.component';
     PersonDetailsComponent,
     HomeComponent,
     PersonListComponent,
-    LoginComponent
+    LoginComponent,
+    ChartsComponent,
+    DiplomaComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,MatInputModule,MatTableModule,MatSelectModule,MatIconModule,MatFormFieldModule,MatCardModule,MatDatepickerModule,MatNativeDateModule,
+    MatButtonModule,MatInputModule,MatTableModule,MatSelectModule,MatIconModule,
+    MatFormFieldModule,MatCardModule,MatDatepickerModule,MatNativeDateModule,MatSnackBarModule,
     HttpClientModule,
     ShowHidePasswordModule,
     FormsModule,ReactiveFormsModule,
@@ -52,7 +59,7 @@ import { LoginComponent } from './login/login.component';
     NgbModule,
     
   ],
-  providers: [],
+  providers: [loginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
