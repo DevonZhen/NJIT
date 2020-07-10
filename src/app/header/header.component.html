@@ -1,26 +1,21 @@
 <div class="container-fluid">
     <div class="row" id="topnavbar">
-        <div class="col-sm-8">Welcome, Devon Zhen! Message from Service : {{data}} </div>
-        <div class="col-sm-2" style="text-align: right;">{{ currentTime }}</div>
-        <div class="col-sm-2" style="text-align: right;">
+        <div class="col-6">Welcome to NJIT Website! </div>
+        <div class="col-3" style="text-align: right;">{{ currentTime }}</div>
+        <div class="col-3" style="text-align: right;">
             <a routerLink="login"><button mat-button>Login</button></a> &nbsp;|&nbsp;
-            <button mat-button>Sign Out</button>
+           <button mat-button (click)="signout()" >Sign Out</button>
         </div>
-    </div>
+    </div> 
     <div class="row" id="bottomnavbar" >
-        <div class="col-sm-4" ><a routerLink=""><img src="assets/images/logo.png" ></a></div>
-        <div class="col-sm-4" id="headercontent" >
+        <div class="col-4" ><a routerLink=""><img src="assets/images/logo.png" ></a></div>
+        <div class="col-4" id="headercontent" >
             <div *ngIf="visibility">
-                <a routerLink="personDetails"><i class="material-icons">person</i> Create Profile</a> &nbsp;&nbsp;&nbsp;
-                <a routerLink="personList"><i class="material-icons">update</i> Update Profile</a> &nbsp;&nbsp;&nbsp;
-                <a routerLink=""><i class="material-icons">bar_chart</i> Charts </a> &nbsp;&nbsp;&nbsp;
-                <a routerLink=""><i class="material-icons">picture_in_picture</i> Diploma </a> &nbsp;&nbsp;&nbsp;
+                <a routerLink="personDetails" *ngIf="display"><i class="material-icons">person</i> Create Profile</a> &nbsp;&nbsp;&nbsp;
+                <a routerLink="personList"    *ngIf="display"><i class="material-icons">update</i> Update Profile</a> &nbsp;&nbsp;&nbsp;
+                <!-- <a routerLink=""><i class="material-icons">bar_chart</i> Charts </a> &nbsp;&nbsp;&nbsp;
+                <a routerLink=""><i class="material-icons">picture_in_picture</i> Diploma </a> &nbsp;&nbsp;&nbsp; -->
             </div>
         </div>
-        <div class="col-sm-4" style="text-align: right;">
-            <mat-form-field>
-                <mat-label>Search</mat-label>
-                <input matInput placeholder="Ex. Person" autocomplete="off">
-            </mat-form-field>
-        </div>
+        <div class="col-4"></div>
     </div>

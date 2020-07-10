@@ -11,12 +11,12 @@
         <div class="col-sm-4" >
             <mat-card>
                 <div class="row">
-                    <div class="col-sm-12" style="text-align: center;"><h1>Login</h1></div>
+                    <div class="col-12" style="text-align: center;"><h1>Login</h1></div>
                 </div>
                 <div class="row" style="text-align: center;">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8" >
-                        <mat-form-field class="full-width" id="logindetails">
+                        <mat-form-field  id="logindetails" style="width: 100%;" >
                             <mat-label>Username</mat-label>
                             <input matInput  formControlName="userId" autocomplete="off">
                         </mat-form-field>
@@ -26,7 +26,7 @@
                 <div class="row" style="text-align: center;">
                     <div class="col-sm-2"></div>
                     <div class="col-sm-8">
-                        <mat-form-field class="full-width" id="logindetails">
+                        <mat-form-field  id="logindetails" style="width: 100%;">
                             <input matInput id="password" type="password" placeholder="Password" formControlName="password" autocomplete="off" showHideInput >
                             <i class="material-icons" matSuffix showHideTrigger="password" [showHideStatus]="{ materialIcon: true, id: 'password' }"></i>
                         </mat-form-field> 
@@ -51,4 +51,19 @@
         <div class="col-sm-4" ></div>
     </div>
     </form>
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4 text-center" >
+            <br>
+            <h5>Test Accounts:</h5>
+            <ul style="list-style: none; text-align: left;  display: inline-block;">
+                <li><b>Username</b>&nbsp;&nbsp;&nbsp;&nbsp;<b>Password</b></li>
+                <li>JIMMY03 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jimmy123 &nbsp;(Current)</li>
+                <li>TEST111 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</li>
+                
+            </ul>
+          
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RxFormBuilder,FormGroupExtension } from '@rxweb/reactive-form-validators';
 import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { RestfulService } from './../services/restful.service'
 import { matchValues } from './../../directives/match-values'
@@ -29,7 +30,7 @@ export class PersonDetailsComponent implements OnInit {
   detailForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private formBuilder: FormBuilder,
+              private formBuilder: RxFormBuilder,
               private snackBar: MatSnackBar,
               private restService: RestfulService) { }
 
@@ -127,7 +128,7 @@ export class PersonDetailsComponent implements OnInit {
         contactName: [''],
         contactRelation: [''],
         contactPhone: [''],
-        contactEmail: [''],
+        contactEmail: ['',[Validators.email]],
       }),
       phones: this.constructPhoneArray()
     });
@@ -185,7 +186,7 @@ export class PersonDetailsComponent implements OnInit {
     .subscribe(
       data => { 
         this.personTypes = data;
-        console.log("Deez variables"+JSON.stringify(data));
+        console.log("The variables"+JSON.stringify(data));
       },
       err => {
         console.log("(Person Detail) Error occured: personType() failed")
@@ -278,6 +279,16 @@ export class PersonDetailsComponent implements OnInit {
     this.phones.removeAt(i);
   }
 
+  // reset(){
+  //   console.log("Resetting...");
+  //   this.detailForm.reset();
+  //   this.getPersonDetail(this.getSSN());   
+  // }
+
+  reset(){
+    (<FormGroupExtension>this.detailForm).resetForm();
+  }
+
   onSubmit() {
     //Display Reactive Form's JSON Values
     console.log("Form Data: "+JSON.stringify(this.detailForm.value));
@@ -295,7 +306,7 @@ export class PersonDetailsComponent implements OnInit {
               panelClass: ['mat-toolbar', 'mat-primary'] // 'mat-accent' or 'mat-warn'
             });
          } else {
-            this.snackBar.open("Person data has been saved successfully!", 'close',  {
+            this.snackBar.open("Person data has been reset successfully!", 'close',  {
               duration: 5000,
               panelClass: ['mat-toolbar', 'mat-warn'] // 'mat-accent' or 'mat-warn'
             });
